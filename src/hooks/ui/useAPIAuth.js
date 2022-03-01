@@ -1,7 +1,8 @@
 //imports useState hook from react
 import { useState } from "react"
 
-
+//AUTHENTICATION
+//purpose of useAPIAuth is to check user credentials and either log in or log out
 // defines a new function, useAPIAuth
 const useAPIAuth = () => {
 
@@ -9,6 +10,8 @@ const useAPIAuth = () => {
     const [loggedIn, setIsLoggedIn] = useState(false)
 
     //defines a new function, isAuthenticated
+    //isAuthenticated function has a purpose of checking the loggedIn value (boolean) and change to true
+        //changes to true if credentials don't equal null 
     const isAuthenticated = () =>
         loggedIn
         //checks that "credentials" in local and session storage is not null
@@ -34,6 +37,7 @@ const useAPIAuth = () => {
         setIsLoggedIn(true)
     }
 
+    //changes loggedIn value to false and removes credentials
     //defines a new function, logout
     const logout = () => {
 

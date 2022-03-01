@@ -3,7 +3,8 @@
 //allows access to the localhost and secretKey(like a password to access the )
 import Settings from "../../repositories/Settings"
 
-//this module is mainly used for authorizing and profiling users
+//AUTHORIZATION
+//this module is mainly used for authorizing and profiling users and store a kennel_token to keep track of current user
 //a custom hook to authenticate users and adds a login system to the app
 //one main purpose is to offer different types of access to different users (ie. customers vs employees)
 const useSimpleAuth = () => {

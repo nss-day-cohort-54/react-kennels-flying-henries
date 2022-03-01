@@ -1,7 +1,10 @@
 import { useState } from "react"
+
+//useModal defines a pop-up window or dialogue box
 // modal - mode
 const useModal = (selector) => {
     // set up state for modalIsOpen
+    //modalIsOpen is a boolean value
     const [modalIsOpen, setIsOpen] = useState(false)
     // function that sets modalIsOpen state
     const toggleDialog = () => {
