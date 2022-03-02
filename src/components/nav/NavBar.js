@@ -8,34 +8,48 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "./NavBar.css"
 
 
-
+//exports a search bar & the nav bar
 export const NavBar = () => {
+    //search terms is an empty string and allows a user to save a search to state
     const [ searchTerms, setTerms ] = useState("")
+    //getting the users info & authentication
     const { isAuthenticated, logout, getCurrentUser } = useSimpleAuth()
     const history = useHistory()
 
+    //search event listener
     const search = (e) => {
+        //if enter key is pressed, then search
         if (e.keyCode === 13) {
+            //get the search terms from document
             const terms = document.querySelector("#searchTerms").value
+            //creates foundItems object and contains empty arrays
             const foundItems = {
                 animals: [],
                 locations: [],
                 employees: []
             }
-
+            //fetch the remoteURL from setting
+            //terms are encoded for unique URL when searched
+            //.then searches the different resources and returns matching resources with terms as input
             fetch(`${Settings.remoteURL}/users?employee=true&name_like=${encodeURI(terms)}`)
                 .then(r => r.json())
+                //set the foundItems.employees as employees 
                 .then(employees => {
                     foundItems.employees = employees
+                    //return the location
                     return LocationRepository.search(terms)
                 })
                 .then(locations => {
+                    //set the location
                     foundItems.locations = locations
                     return AnimalRepository.searchByName(encodeURI(terms))
                 })
                 .then(animals => {
+                    //set the animals
                     foundItems.animals = animals
+                    //changes searchTerms
                     setTerms("")
+                    //sending user to the search page after setting terms - returns an empty string to search again?
                     history.push({
                         pathname: "/search",
                         state: foundItems
@@ -43,10 +57,12 @@ export const NavBar = () => {
                 })
         }
         else {
+            //if user has not entered... then search field is set as searchTerms (whatever the user has input) transient state
             setTerms(e.target.value)
         }
     }
 
+        //return JSX including navbar hyperlinks
     return (
         <div className="container">
             <nav className="navbar navbar-expand-sm navbar-light bg-light fixed-top onTop">

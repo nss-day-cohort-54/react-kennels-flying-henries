@@ -11,6 +11,7 @@ export const OxfordList = (resources: Array<Object>, namespace: string) => {
             // function declares var and data type to pass property string into data object
             (data: Object, property: string) => {
                 // @ts-ignore
+                //^ possibly ignoring what is on the following line and suppresses errors?
                 return data[property]
             }, resource
         )
