@@ -27,6 +27,7 @@ const useResourceResolver = () => {
         }
         else {
             // If being rendered indepedently
+            // if param is true, invoke getter with param as argument then update state
             if (param) {
                 getter(param).then(retrievedResource => {
                     setResource(retrievedResource)
@@ -34,8 +35,8 @@ const useResourceResolver = () => {
             }
         }
     }
-
+    // sets resource returns resource
     return { resolveResource, resource }
 }
-
+// exports a single return value
 export default useResourceResolver

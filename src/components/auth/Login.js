@@ -3,16 +3,23 @@ import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 import { Link, useHistory } from "react-router-dom";
 import "./Login.css"
 
+//  useSimpleAuth is used to get user from API and encode data and is stored as kennel_token in local storage, 
+// then returns boolean that shows is user exists
+// user information is imported into Login function
 
+// function for logging in 
 const Login = () => {
+    // sets up credentials state and sets up default object
     const [credentials, syncAuth] = useState({
         email: "",
         remember: false
     })
+    // gets login value from useSimpleAuth function 
     const { login } = useSimpleAuth()
     const history = useHistory()
 
     // Simplistic handler for login submit
+    // prevents default html loading, then setting storage- if true get data from localStorage, if not get data from sessionStorage
     const handleLogin = (e) => {
         e.preventDefault()
         const storage = credentials.remember ? localStorage : sessionStorage
@@ -21,22 +28,29 @@ const Login = () => {
             For now, just store the email and userName that
             the customer enters into local storage.
         */
+        // after storage is set, console log message and send data into login function
         console.log("*** Initiate authentication ***")
         login(credentials.email, credentials.userName, storage)
+            // update state
             .then(success => {
+                // if data comes back console log message
                 if (success) {
                     console.log("*** Rerouting to root URL ***")
+                    // use history to push back to home page
                     history.push("/")
                 }
             })
     }
-
+    // event handler for user input
     const handleUserInput = (event) => {
+        // gets state of credentials
         const copy = {...credentials}
+        // sets id of copy as value enter
         copy[event.target.id] = event.target.value
+        // update state of credentials with new data
         syncAuth(copy)
     }
-
+    // return JSX
     return (
         <main className="container--login">
             <section>
