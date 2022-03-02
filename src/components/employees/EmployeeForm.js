@@ -2,11 +2,12 @@ import React, { useState } from "react"
 import EmployeeRepository from "../../repositories/EmployeeRepository";
 import "./EmployeeForm.css"
 
-
+// exports function which produces JSX output
 export default (props) => {
+    // sets up state
     const [employee, updateEmployee] = useState()
     const [locations, defineLocations] = useState([])
-
+// function checks if employee id has been assigned, if true it makes a new employee object..
     const constructNewEmployee = () => {
         if (employee.locationId === 0) {
             window.alert("Please select a location")
@@ -15,23 +16,26 @@ export default (props) => {
                 name: employee.name,
                 employee: true
             })
+            // then make an object assigns employee location
             .then(employee => {
                 EmployeeRepository.assignEmployee({
                     employeeId: employee.id,
                     locationId: employee.location
                 })
             })
+            // pushes user back to employees page
             .then(() => props.history.push("/employees"))
         }
     }
-
+    // event handler copies employee state and adds an id from input value
     const handleUserInput = (event) => {
         const copy = {...employee}
         copy[event.target.id] = event.target.value
+        // updates employee state
         updateEmployee(copy)
     }
 
-
+    // returns JSX
     return (
         <>
             <form className="employeeForm">

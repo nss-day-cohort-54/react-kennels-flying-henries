@@ -6,52 +6,69 @@ import OwnerRepository from "../../repositories/OwnerRepository";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 import useResourceResolver from "../../hooks/resource/useResourceResolver";
 import "./AnimalCard.css"
-
+// function produces JSX for a single representation of an animal
+// Animal takes props
 export const Animal = ({ animal, syncAnimals,
     showTreatmentHistory, owners }) => {
+        // set state
     const [detailsOpen, setDetailsOpen] = useState(false)
     const [isEmployee, setAuth] = useState(false)
     const [myOwners, setPeople] = useState([])
     const [allOwners, registerOwners] = useState([])
     const [classes, defineClasses] = useState("card animal")
+    // useSimpleAuth returns true if current user is employee
     const { getCurrentUser } = useSimpleAuth()
     const history = useHistory()
     const { animalId } = useParams()
     const { resolveResource, resource: currentAnimal } = useResourceResolver()
 
+    // sets boolean value for employee property
     useEffect(() => {
         setAuth(getCurrentUser().employee)
+        // sets resolveResource to animal object with all data associated with the animal that is assigned to the employee
         resolveResource(animal, animalId, AnimalRepository.get)
     }, [])
 
+    // registerOwners updates allOwners state which is an array and passes owners as argument
     useEffect(() => {
         if (owners) {
+            // updates state of owners array
             registerOwners(owners)
         }
     }, [owners])
 
+    // gets function that returns owners by animal from AnimalOwnerRepository
+    // sets state for myOwners array
     const getPeople = () => {
         return AnimalOwnerRepository
+            // function matches animal with owner
             .getOwnersByAnimal(currentAnimal.id)
             .then(people => setPeople(people))
     }
-
+    // when currentAnimal state changes, invoke getPeople to find new owner
     useEffect(() => {
         getPeople()
     }, [currentAnimal])
 
+    // if animalId is present in useParams function...
     useEffect(() => {
         if (animalId) {
+            // define animal HTML tag with below assigned class
             defineClasses("card animal--single")
+            // displays details of animal by switching setDetailOpen to true
             setDetailsOpen(true)
 
+            // fetches animal users by animal id, 
+            // then set state of myOwners to all users which have that animal id
             AnimalOwnerRepository.getOwnersByAnimal(animalId).then(d => setPeople(d))
                 .then(() => {
+                    // get all customers state, then call registerOwners function
                     OwnerRepository.getAllCustomers().then(registerOwners)
                 })
         }
     }, [animalId])
 
+    // return JSX with card that displays info for each animal
     return (
         <>
             <li className={classes}>
