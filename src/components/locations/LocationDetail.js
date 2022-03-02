@@ -7,17 +7,20 @@ import "./Location.css"
 
 
 export default () => {
+    //sets up initial state for animals employees and location
     const [animals, setAnimals] = useState([])
     const [employees, updateEmployees] = useState([])
     const [location, set] = useState({animals:[], employeeLocations: []})
 
     const { locationId } = useParams()
 
-
+//when locationId changes, access the LocationRepository, get the locationId, then using set to update
+//location with the gotten locationId
     useEffect(() => {
        LocationRepository.get(locationId).then(set)
     }, [locationId])
 
+    //return JSX
     return (
         <>
             <div className="jumbotron detailCard">

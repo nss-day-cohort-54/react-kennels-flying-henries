@@ -2,8 +2,9 @@ import React, { Component } from "react"
 import "./Animal.css"
 import dog from "./DogIcon.svg"
 
-
+//converting a function component ownerdetail to a class
 export default class OwnerDetail extends Component {
+    // Add a single empty method to it called render()
     render() {
         /*
             Using the route parameter, find the animal that the
@@ -11,6 +12,7 @@ export default class OwnerDetail extends Component {
             collection that was passed down from ApplicationViews
         */
         const animal = this.props.animals.find(a =>
+            //matches the dog that was clicked, if it can't you get a 404
             a.id === parseInt(this.props.match.params.animalId))
              || {id:404, name:"404", breed: "Dog not found"}
 

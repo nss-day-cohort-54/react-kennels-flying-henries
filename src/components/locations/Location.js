@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import locationImage from "./location.png"
 import "./Location.css"
 
-
+//location just returns JSX
 export default ({location}) => {
     return (
         <article className="card location" style={{ width: `18rem` }}>

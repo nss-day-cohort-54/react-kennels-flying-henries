@@ -12,14 +12,18 @@ import "./Kennel.css"
 export const Kennel = () => {
     const { isAuthenticated } = useSimpleAuth()
 
+    //if current user is authenticated...
     return <>
         <Route render={() => {
             if (isAuthenticated()) {
+                //...render these
                 return <>
                     <NavBar />
                     <ApplicationViews />
                 </>
-            } else {
+            } else 
+            //if not authenticated
+            {
                 return <Redirect to="/login" />
             }
         }} />

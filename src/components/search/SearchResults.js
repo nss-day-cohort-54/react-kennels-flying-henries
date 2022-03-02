@@ -6,9 +6,13 @@ import "./SearchResults.css"
 export default () => {
     const location = useLocation()
 
+
     const displayAnimals = () => {
+        //if state property exists on location... 
         if (location.state?.animals.length) {
-            return (
+            
+            //...render this
+            return    (
                 <React.Fragment>
                     <h2>Matching Animals</h2>
                     <section className="animals">
@@ -18,7 +22,8 @@ export default () => {
             )
         }
     }
-
+    
+//same logic as displayAnimals function
     const displayEmployees = () => {
         if (location.state?.employees.length) {
             return (
@@ -32,6 +37,8 @@ export default () => {
         }
     }
 
+
+    //same logic
     const displayLocations = () => {
         if (location.state?.locations.length) {
             return (
@@ -45,6 +52,8 @@ export default () => {
         }
     }
 
+
+    //return an article tag with the values of all functions inside tthe return statement
     return (
         <React.Fragment>
             <article className="searchResults">
