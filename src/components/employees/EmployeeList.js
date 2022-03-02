@@ -3,16 +3,18 @@ import Employee from "./Employee"
 import EmployeeRepository from "../../repositories/EmployeeRepository"
 import "./EmployeeList.css"
 
-
+// exports function to list out employees
 export default () => {
+    // sets up employee state
     const [emps, setEmployees] = useState([])
 
+    // gets all data from EmployeeRepository
     useEffect(
         () => {
             EmployeeRepository.getAll()
         }, []
     )
-
+// returns html of employee list
     return (
         <>
             <div className="employees">
