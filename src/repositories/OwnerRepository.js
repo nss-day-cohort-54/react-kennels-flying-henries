@@ -2,6 +2,7 @@ import Settings from "./Settings"
 import { fetchIt } from "./Fetch"
 
 export default {
+    //fetching animal owner
     async get(id) {
         return await fetchIt(`${Settings.remoteURL}/users/${id}`)
     },
