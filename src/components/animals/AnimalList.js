@@ -53,6 +53,8 @@ export const AnimalListComponent = (props) => {
 
         window.addEventListener("keyup", handler)
 
+        console.log("event useEffect fired")
+
         return () => window.removeEventListener("keyup", handler)
     }, [toggleDialog, modalIsOpen])
 
