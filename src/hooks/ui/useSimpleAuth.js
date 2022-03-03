@@ -2,6 +2,7 @@
 //imports the exported "default" object in the Settings.js file
 //allows access to the localhost and secretKey(like a password to access the )
 import Settings from "../../repositories/Settings"
+import { Buffer } from "buffer"
 
 //AUTHORIZATION
 //this module is mainly used for authorizing and profiling users and store a kennel_token to keep track of current user

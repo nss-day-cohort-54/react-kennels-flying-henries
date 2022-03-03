@@ -8,8 +8,7 @@ import useResourceResolver from "../../hooks/resource/useResourceResolver";
 import "./AnimalCard.css"
 // function produces JSX for a single representation of an animal
 // Animal takes props
-export const Animal = ({ animal, syncAnimals,
-    showTreatmentHistory, owners }) => {
+export const Animal = ({ animal, syncAnimals, showTreatmentHistory, owners }) => {
         // set state
     const [detailsOpen, setDetailsOpen] = useState(false)
     const [isEmployee, setAuth] = useState(false)
@@ -101,7 +100,9 @@ export const Animal = ({ animal, syncAnimals,
                         <section>
                             <h6>Caretaker(s)</h6>
                             <span className="small">
-                                Unknown
+                                {currentAnimal.animalCaretakers?.map(caretaker => {
+                                    return <div key={`user-${caretaker.id}`}>{caretaker.user.name}</div>
+                                })}
                             </span>
 
 
