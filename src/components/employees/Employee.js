@@ -28,6 +28,15 @@ export default ({ employee }) => {
         resolveResource(employee, employeeId, EmployeeRepository.get)
     }, [])
 
+
+
+
+
+
+
+
+
+
         // useEffect checks if employeeLocations length is greater than zero
     useEffect(() => {
         if (resource?.employeeLocations?.length > 0) { 

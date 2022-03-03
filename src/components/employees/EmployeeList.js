@@ -12,8 +12,20 @@ export default () => {
     useEffect(
         () => {
             EmployeeRepository.getAll()
+            .then(
+                (emps) => {
+                    setEmployees(emps)
+                }
+            )
         }, []
     )
+ 
+
+
+
+
+
+
 // returns html of employee list
     return (
         <>
