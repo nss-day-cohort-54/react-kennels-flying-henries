@@ -25,11 +25,15 @@ export default () => {
         <>
             <div className="employees">
                 {
+<<<<<<< HEAD
                     emps.map(employee => <Employee 
                         key={employee.id} 
                         employee={employee} 
                         emps={emps}
                         />)
+=======
+                    emps.map(employee => <Employee key={employee.id} employee={employee} setEmployees={setEmployees} employees={emps}/>)
+>>>>>>> main
                 }
             </div>
         </>
