@@ -8,10 +8,16 @@ export default () => {
     // sets up employee state
     const [emps, setEmployees] = useState([])
 
+
     // gets all data from EmployeeRepository
     useEffect(
         () => {
             EmployeeRepository.getAll()
+            .then(
+                (employeeData) => {
+                    setEmployees(employeeData)
+                }
+            )
         }, []
     )
 // returns html of employee list
@@ -19,7 +25,7 @@ export default () => {
         <>
             <div className="employees">
                 {
-                    emps.map(a => <Employee key={a.id} employee={a} />)
+                    emps.map(employee => <Employee key={employee.id} employee={employee} />)
                 }
             </div>
         </>

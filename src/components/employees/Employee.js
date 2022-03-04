@@ -17,7 +17,7 @@ export default ({ employee }) => {
     // get current user from simpleAuth
     const { getCurrentUser } = useSimpleAuth()
     // get data from useResourceResolver function
-    const { resolveResource, resource } = useResourceResolver()
+    const { resolveResource, resource: currentEmployee } = useResourceResolver()
 
     // checks if employeeId is true, then updates the class in the HTML representation
     useEffect(() => {
@@ -30,11 +30,11 @@ export default ({ employee }) => {
 
         // useEffect checks if employeeLocations length is greater than zero
     useEffect(() => {
-        if (resource?.employeeLocations?.length > 0) { 
+        if (currentEmployee?.employeeLocations?.length > 0) { 
             // if true- pass employeeLocation from array into location state (where does array come from?)
-            markLocation(resource.employeeLocations[0])
+            markLocation(currentEmployee.employeeLocations[0])
         }
-    }, [resource])
+    }, [currentEmployee])
     // return JSX
     return (
         <article className={classes}>
@@ -43,13 +43,13 @@ export default ({ employee }) => {
                 <h5 className="card-title">
                     {
                         employeeId
-                            ? resource.name
+                            ? currentEmployee.name
                             : <Link className="card-link"
                                 to={{
-                                    pathname: `/employees/${resource.id}`,
-                                    state: { employee: resource }
+                                    pathname: `/employees/${currentEmployee.id}`,
+                                    state: { employee: currentEmployee }
                                 }}>
-                                {resource.name}
+                                {currentEmployee.name}
                             </Link>
 
                     }
@@ -58,10 +58,10 @@ export default ({ employee }) => {
                     employeeId
                         ? <>
                             <section>
-                                Caring for 0 animals
+                                Caring for {animalCount} animals
                             </section>
                             <section>
-                                Working at unknown location
+                                Working at {location.name} location
                             </section>
                         </>
                         : ""
