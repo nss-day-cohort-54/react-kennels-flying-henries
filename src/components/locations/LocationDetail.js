@@ -17,7 +17,7 @@ export default () => {
 //when locationId changes, access the LocationRepository, get the locationId, then using set to update
 //location with the gotten locationId
     useEffect(() => {
-       LocationRepository.get(locationId).then(set)
+        LocationRepository.get(locationId).then(set)
     }, [locationId])
 
     //return JSX
@@ -36,7 +36,6 @@ export default () => {
                         )
                     }
                 </p>
-
                 <hr className="my-4" />
                 <p className="lead detailCard__info">
                     {
