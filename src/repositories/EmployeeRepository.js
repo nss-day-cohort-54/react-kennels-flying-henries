@@ -40,6 +40,9 @@ export default {
     async assignEmployee(rel) {
         return await fetchIt(`${Settings.remoteURL}/employeeLocations`, "POST", JSON.stringify(rel))
     },
+    async getEmployeesWithAnimals() {
+        return await fetchIt(`${Settings.remoteURL}/users?employee=true&_embed=animalCaretakers`)
+    },
     //get's all data for employee and employee locations
     async getAll() {
         return await fetchIt(`${Settings.remoteURL}/users?employee=true&_embed=employeeLocations`)

@@ -6,6 +6,7 @@ import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 import person from "./person.png"
 import "./Employee.css"
 
+
 // function outputs single representation of employee
 export default ({ employee, setEmployees, employees }) => {
     // set up all state needed
@@ -36,6 +37,10 @@ export default ({ employee, setEmployees, employees }) => {
         if (currentEmployee?.employeeLocations?.length > 0) {
             // if true- pass employeeLocation from array into location state (where does array come from?)
             markLocation(currentEmployee.employeeLocations[0])
+        }
+        if (currentEmployee?.animals?.length > 0) {
+            const count = currentEmployee.animals.length
+            setCount(count)
         }
     }, [currentEmployee])
     // return JSX
