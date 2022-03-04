@@ -8,7 +8,7 @@ export default {
         const userLocations = await fetchIt(`${Settings.remoteURL}/employeeLocations?userId=${id}&_expand=location&_expand=user`)
         return await fetchIt(`${Settings.remoteURL}/animalCaretakers?userId=${id}&_expand=animal`)
             .then(data => {
-                const userWithRelationships = userLocations[0].user
+                const userWithRelationships = userLocations
                 userWithRelationships.locations = userLocations
                 userWithRelationships.animals = data
                 return userWithRelationships
@@ -18,6 +18,19 @@ export default {
     //allows a user to delete a user/employee
     async delete(id) {
         return await fetchIt(`${Settings.remoteURL}/users/${id}`, "DELETE")
+        .then(() => {
+            //get caretakers
+            const careTakers = fetchIt(`${Settings.remoteURL}/animalCaretakers`)
+            return careTakers
+        })
+        .then((careTakers) => {
+            //match id against caretakers.userId
+            const matchedCareTakers = careTakers.filter(careTaker => careTaker.userId === id)
+            //delete matching caretaker objects
+            for (const careTaker of matchedCareTakers) {
+                fetchIt(`${Settings.remoteURL}/animalCaretakers/${careTaker.id}`, "DELETE")
+            }
+        })
     },
     //allows user to add an employee
     async addEmployee(employee) {
